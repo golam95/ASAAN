@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+<div layout:fragment="adminContent">
+
+	<div style="border: 1px solid #849BC0; border-radius: 5px;"
+		class="x_panel">
+		<div class="x_title">
+			<h2
+				style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Report
+				Information</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+			<br />
+
+			<form class="form-horizontal form-label-left">
+				<div class="row">
+					<div class="col-md-3">
+
+						<div class="card border-success mx-sm-1 p-3">
+							<div class="card border-success shadow text-success p-3 my-card">
+								<span class="fa fa-file-pdf-o" aria-hidden="true"></span>
+							</div>
+							<div class="text-success text-center mt-3">
+
+								<a style="color: #251577; font-weight: bold; margin-top: 20px;"
+									th:href="@{/admin/userReport}" target="_blank">User Report
+								</a>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="card border-success mx-sm-1 p-3">
+							<div class="card border-success shadow text-success p-3 my-card">
+								<span class="fa fa-file-pdf-o" aria-hidden="true"></span>
+							</div>
+							<div class="text-success text-center mt-3">
+								<a style="color: #251577; font-weight: bold; margin-top: 20px;"
+									th:href="@{/admin/sellerReport}" target="_blank">Appointment
+									Report </a>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="col-md-3">
+						<div class="card border-success mx-sm-1 p-3">
+							<div class="card border-success shadow text-success p-3 my-card">
+								<span class="fa fa-file-pdf-o" aria-hidden="true"></span>
+							</div>
+							<div class="text-success text-center mt-3">
+								<a style="color: #251577; font-weight: bold; margin-top: 20px;"
+									th:href="@{/admin/contactReport}" target="_blank">Message
+									Report </a>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="card border-success mx-sm-1 p-3">
+							<div class="card border-success shadow text-success p-3 my-card">
+								<span class="fa fa-file-pdf-o" aria-hidden="true"></span>
+							</div>
+							<div class="text-success text-center mt-3">
+								<a style="color: #251577; font-weight: bold; margin-top: 20px;"
+									th:href="@{/admin/orderReport}" target="_blank">Order
+									Report </a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+
+<div layout:fragment="adminScript"></div>
+
+<div layout:fragment="adminCss">
+	<style>
+.my-card {
+	position: absolute;
+	left: 40%;
+	top: -20px;
+	border-radius: 50%;
+}
+</style>
+
+</div>

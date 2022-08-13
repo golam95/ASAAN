@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+<div layout:fragment="adminContent">
+
+	<div style="border: 1px solid #849BC0; border-radius: 5px;"
+		class="x_panel">
+		<div class="x_title">
+			<h2
+				style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Graph
+				Report</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+			<script
+				src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="https://www.gstatic.com/charts/loader.js"></script>
+			<script type="text/javascript">
+				google.charts.load('current', {
+					'packages' : [ 'corechart' ]
+				});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+					var d = [[${buyCount}]];
+					var d1 = [[${sellCount}]];
+					var data = google.visualization.arrayToDataTable([
+							[ 'string', 'number' ], [ 'Buyer', d ],
+							[ 'Seller', d1 ] ]);
+					var options = {
+						title : 'Percentage of buyer and seller',
+						is3D : true,
+					};
+					var chart = new google.visualization.PieChart(document
+							.getElementById('piechart1_div'));
+					chart.draw(data, options);
+				}
+			</script>
+
+			<script type="text/javascript">
+				google.charts.load('current', {
+					'packages' : [ 'corechart' ]
+				});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+					var d2 = [[${orderCount}]];
+					var d3 = [[${scheduleCount}]];
+					var data = google.visualization.arrayToDataTable([
+							[ 'string', 'number' ], [ 'Order', d2 ],
+							[ 'Schedule', d3 ] ]);
+					var options = {
+						title : 'Percentage of order and farmer Schedule',
+						is3D : true,
+					};
+					var chart = new google.visualization.PieChart(document
+							.getElementById('piechart2_div'));
+					chart.draw(data, options);
+				}
+			</script>
+
+			<script type="text/javascript">
+				google.charts.load('current', {
+					'packages' : [ 'corechart' ]
+				});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+					var d4 =  [[${contactCount}]];
+					var d5 = [[${SellMsgCount}]];
+					var data = google.visualization.arrayToDataTable([
+							[ 'string', 'number' ], [ 'Contact', d4 ],
+							[ 'Message', d5 ] ]);
+					var options = {
+						title : 'Percentage of contactinfo and messageinfo',
+						is3D : true,
+					};
+					var chart = new google.visualization.PieChart(document
+							.getElementById('piechart3_div'));
+					chart.draw(data, options);
+				}
+			</script>
+
+
+			<script type="text/javascript">
+				google.charts.load('current', {
+					'packages' : [ 'corechart' ]
+				});
+				google.charts.setOnLoadCallback(drawChart);
+				
+		
+
+				function drawChart() {
+					var dhaka =  [[${dhaka}]];
+					var khulna =  [[${khulna}]];
+					var barisal =  [[${barisal}]];
+					var chittagong =  [[${chittagong}]];
+					var mymensingh =  [[${mymensingh}]];
+					var rajshahi =  [[${rajshahi}]];
+					var sylhet =  [[${sylhet}]];
+					var rangpur =  [[${rangpur}]];
+				
+					var data = google.visualization.arrayToDataTable([
+							[ 'string', 'number' ], [ 'Dhaka', dhaka ],
+							[ 'Khulna', khulna ],[ 'Barisal', barisal ],[ 'Chittagong', chittagong ],[ 'Mymensingh', mymensingh ],[ 'Rajshahi', rajshahi ],[ 'Sylhet', sylhet ],[ 'Rangpur', rangpur ] ]);
+					var options = {
+						title : 'Percentage of division wise farmer schedule list',
+						is3D : true,
+					};
+					var chart = new google.visualization.BarChart(document
+							.getElementById('piechart4_div'));
+					chart.draw(data, options);
+				}
+			</script>
+
+
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div id="piechart1_div"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="piechart2_div"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="piechart3_div"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div style="border: 1px solid #849BC0; border-radius: 5px;"
+				class="x_panel">
+				<div class="x_title">
+					<h2
+						style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Division
+						Wise Farmer Schedule List</h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<div class="col-md-12">
+
+						<div id="piechart4_div"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+<div layout:fragment="adminScript"></div>
+
+<div layout:fragment="adminCss"></div>

@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Buy product</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="my-account-section section position-relative mb-50 fix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<!-- My Account Tab Menu Start -->
+						<div class="col-lg-3 col-12">
+							<div class="myaccount-tab-menu nav" role="tablist">
+								<a href="#product" id="tabProduct" data-toggle="tab"><i
+									class="fa fa-dashboard"></i> Products</a> <a
+									sec:authorize="hasRole('ROLE_USER')" href="#customerOrder"
+									id="tabProduct" data-toggle="tab"><i
+									class="fa fa-dashboard"></i> Order Details</a> <a
+									sec:authorize="hasRole('ROLE_USER')"
+									href="#sendMessageCustomer" id="tabProduct" data-toggle="tab"><i
+									class="fa fa-dashboard"></i> Send Message</a>
+							</div>
+						</div>
+						<!-- My Account Tab Menu End -->
+						<!-- My Account Tab Content Start -->
+						<div class="col-lg-9 col-12">
+							<div class="tab-content" id="myaccountContent">
+
+								<input type="hidden" id="activeUser" th:value="${Userstatus}">
+
+								<!-- Single Tab Content Start -->
+								<div class="tab-pane fade" id="product" role="tabpanel">
+									<div class="myaccount-content">
+										<div class="myaccount-table table-responsive text-center">
+											<div class="cart-table table-responsive mb-40">
+												<div style="padding: 10px;">
+													<label for="qnty">Select Quantity</label> <select id="qnty"
+														style="width: 70px;">
+														<option value="1">1kg</option>
+														<option value="2">2kg</option>
+														<option value="3">3kg</option>
+														<option value="4">4kg</option>
+														<option value="5">5kg</option>
+													</select>
+												</div>
+												<table class="table" id="tblbuyintProduct">
+													<thead>
+														<tr>
+															<th hidden style="font-size: 12px;">Product Id</th>
+															<th style="font-size: 12px;">Product Name</th>
+															<th style="font-size: 12px;">Price(AED)</th>
+															<th style="font-size: 12px;">Quantity(KG)</th>
+															<th style="font-size: 12px;">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="product : ${buyProductList}">
+															<td hidden style="font-size: 13px;"
+																th:text="${product.productId}"></td>
+															<td style="font-size: 13px;"
+																th:text="${product.productName}"></td>
+															<td style="font-size: 13px;" th:text="${product.price}"></td>
+															<td
+																style="font-size: 10px;color:black;font-weight:bold;"
+																th:text="${product.govtprice} >2 ?'Available':'Out Of Stock'"></td>
+															<td>
+																<button style="color: #FFFFFF;" type="button" id="edit"
+																	class="btn btn-sm btn-warning">Add Cart</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="tab-pane fade" id="customerOrder" role="tabpanel">
+									<div class="myaccount-content">
+										<div class="myaccount-table table-responsive text-center">
+											<div class="cart-table table-responsive mb-40">
+												<table class="table" id="tblbuyintProduct">
+													<thead>
+														<tr>
+															<th style="font-size: 12px;">Product Name</th>
+															<th style="font-size: 12px;">Price(TK)</th>
+															<th style="font-size: 12px;">Quantity(KG)</th>
+															<th style="font-size: 12px;">Date</th>
+															<th style="font-size: 12px;">Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="order : ${customerOrderList}">
+															<td style="font-size: 13px;"
+																th:text="${order.productName}"></td>
+															<td style="font-size: 13px;"
+																th:text="${order.productPrice}"></td>
+															<td style="font-size: 13px;" th:text="${order.quantity}"></td>
+															<td style="font-size: 13px;" th:text="${order.date}"></td>
+															<td
+																style="font-size: 16px; font-weight: bold; color: red;"
+																th:text="${order.status}==1 ? 'Pending' : 'Done'"></td>
+
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="sendMessageCustomer"
+									role="tabpanel">
+									<div class="myaccount-content">
+										<div class="account-details-form">
+											<form>
+												<div class="row">
+													<div class="col-12 mb-30">
+														<input id="subject" placeholder="Enter subject"
+															type="text">
+														<div style="color: red; font-size: 13px;"
+															class="item form-group" id="errormsgSubject"></div>
+													</div>
+													<div class="col-12 mb-30">
+														<textarea class="form-control" rows="6" id="comment"></textarea>
+														<div style="color: red; font-size: 13px;"
+															class="item form-group" id="errormsgComment"></div>
+													</div>
+													<div class="col-12">
+														<button type="button" id="msgSendBuyer"
+															class="save-change-btn">Save</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+					<!-- My Account Tab Content End -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div layout:fragment="script">
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$("#schudleDate").datepicker({
+			dateFormat : 'dd/mm/yy'
+		});
+	</script>
+</div>
+
+<div layout:fragment="css">
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<style>
+.from-design {
+	margin-left: 10px;
+	width: 180px;
+	padding: 1px;
+}
+</style>
+</div>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Register</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-content mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 offset-md-2">
+					<div class="form-group">
+						<div class="col-xs-15">
+							<!-- Check for login error -->
+							<div th:if="${errorMsg}"
+								class="alert alert-danger alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert"
+									aria-label="close">&times;</a> <strong>Error!</strong><span
+									th:text="${errorMsg}"></span>
+							</div>
+							<div th:if="${successMsg}"
+								class="alert alert-success alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert"
+									aria-label="close">&times;</a> <strong>Success!</strong> <span
+									th:text="${successMsg}"></span>
+							</div>
+						</div>
+					</div>
+					<form th:action="@{/customer/addSignup}" th:object="${user}"
+						method="POST" id="signupInfoForm">
+						<div style="border-top: 4px solid #80BB01; border-radius: 5px;"
+							class="login-form">
+							<div class="row">
+								<div class="col-md-12 col-12 mb-20">
+									<label>Name<span class="manadatory">*</span></label> <input
+										class="mb-0" type="text" id="firstname"
+										th:field="*{firstname}" placeholder=""> <span
+										class="errorMsg" id="errorMsgfirstname"></span>
+								</div>
+								<div class="col-md-12 col-12 mb-20">
+									<label>User Name<span class="manadatory">*</span></label> <input
+										class="mb-0" type="text" id="userName" th:field="*{userName}"
+										placeholder=""> <span class="errorMsg"
+										id="errorMsguserName"></span>
+								</div>
+								<div class="col-12 mb-20">
+									<label>Email<span class="manadatory">*</span></label> <input
+										class="mb-0" type="email" id="email" th:field="*{email}"
+										placeholder=""> <span class="errorMsg"
+										id="errorMsgemail"></span>
+								</div>
+								<div class="col-12 mb-20">
+									<label>Contact No<span class="manadatory">*</span></label> <input
+										class="mb-0" type="text" id="phone" th:field="*{phone}"
+										placeholder="01XXXXXXXXX"> <span class="errorMsg"
+										id="errorMsgphone"></span>
+								</div>
+								<div class="col-12 mb-20">
+									<label>Country<span class="manadatory">*</span></label> <select
+										class="mb-0" id="countryName"
+										th:field="*{countryName}">
+										<option value="Bangladesh">Bangladesh</option>
+										<option value="Dubai">Dubai</option>
+									</select>
+
+
+
+
+								</div>
+								<div class="col-12 mb-20">
+									<label>Password<span class="manadatory">*</span></label> <input
+										class="mb-0" type="password" id="password"
+										th:field="*{password}" placeholder="Enter Password"> <span
+										class="errorMsg" id="errorMsgpassword"></span>
+								</div>
+								<div class="col-md-12">
+									<button type="submit" class="register-button mt-0">Save</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div layout:fragment="script">
+	<script src="/js/customer/signup.js"></script>
+</div>

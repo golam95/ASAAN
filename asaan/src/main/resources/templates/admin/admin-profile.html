@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+<div layout:fragment="adminContent">
+
+	<div style="border: 1px solid #849BC0; border-radius: 5px;"
+		class="x_panel">
+		<div class="x_title">
+			<h2
+				style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Account
+				Information</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+
+			<div class="form-group">
+				<div class="col-xs-15">
+
+					<!-- Check for login error -->
+					<div th:if="${errorMsg}"
+						class="alert alert-danger alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Error!</strong><span th:text="${errorMsg}"></span>
+					</div>
+
+					<div th:if="${successMsg}"
+						class="alert alert-success alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Success!</strong> <span th:text="${successMsg}"></span>
+					</div>
+				</div>
+			</div>
+
+			<form>
+				<div class="col-md-12">
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Name </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" id="firstname"
+								th:value="${userProfile.firstname}" required
+								class="form-control">
+						</div>
+					</div>
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Email </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" id="email" th:value="${userProfile.email}"
+								required class="form-control">
+						</div>
+					</div>
+
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Contact No </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" id="phone" th:value="${userProfile.phone}"
+								required class="form-control">
+						</div>
+					</div>
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">New Password </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="password" id="password" class="form-control">
+						</div>
+					</div>
+
+					<div style="margin-left: 232px;">
+
+						<button type="button" class="btn btn-sm btn-success"
+							id="btnUpdateInfo">
+							<i class="fa fa-pencil"></i>Update
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div layout:fragment="adminScript">
+	<script>
+		$(document).ready(function() {
+
+			$("#btnUpdateInfo").click(function() {
+
+				if (true) {
+					var firstname = $('#firstname').val();
+					var email = $('#email').val();
+					var phone = $('#phone').val();
+					var password = $('#password').val();
+
+					var profileList = {};
+					profileList.firstname = firstname;
+					profileList.email = email;
+					profileList.phone = phone;
+					profileList.password = password;
+
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/customer/updateSellerProfile",
+						data : JSON.stringify(profileList),
+						timeout : 100000,
+						async : true,
+						dataType : 'json',
+						success : function(data) {
+							if (data == '1') {
+								alert("Profile updated successfully!!");
+							}
+						},
+						error : function(xhr, status, error) {
+							var err = eval("(" + xhr.responseText + ")");
+							alert(err.Message);
+						}
+					});
+				}
+			});
+		});
+	</script>
+</div>
+
+<div layout:fragment="adminCss"></div>

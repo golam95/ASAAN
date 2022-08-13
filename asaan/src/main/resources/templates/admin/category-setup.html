@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+<div layout:fragment="adminContent">
+
+	<div style="border: 1px solid #849BC0; border-radius: 5px;"
+		class="x_panel">
+		<div class="x_title">
+			<h2
+				style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Product
+				Category Information</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+
+			<div class="form-group">
+				<div class="col-xs-15">
+
+					<!-- Check for login error -->
+					<div th:if="${errorMsg}"
+						class="alert alert-danger alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Error!</strong><span th:text="${errorMsg}"></span>
+					</div>
+
+					<div th:if="${successMsg}"
+						class="alert alert-success alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Success!</strong> <span th:text="${successMsg}"></span>
+					</div>
+				</div>
+			</div>
+
+			<form class="form-horizontal form-label-left"
+				th:action="@{/admin/addProductCategory}" th:object="${category}"
+				method="POST">
+
+				<div class="col-md-12">
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Category Name <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="hidden" th:field="*{id}" id="id"> <input
+								type="text" id="categoryName" th:field="*{categoryName}"
+								required class="form-control">
+						</div>
+					</div>
+					<div style="margin-left: 232px;">
+						<button style="margin-top: 15px;" type="submit"
+							class="btn btn-sm btn-success">
+							Save <i class="fa fa-floppy-o"></i>
+						</button>
+						<button style="margin-top: 15px;" type="button"
+							class="btn btn-sm btn-success" id="btncategoryReset">
+							Reset <i class="fa fa-refresh"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div style="border: 1px solid #849BC0; border-radius: 5px;"
+				class="x_panel">
+				<div class="x_title">
+					<h2
+						style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">Product
+						Category List</h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<table style="width: 100%;" id="tblCategory"
+						class="table table-striped table-bordered dataTable no-footer">
+						<thead>
+							<th hidden>Id</th>
+							<th style="width: 80%">CategoryName</th>
+							<th>Action</th>
+						</thead>
+						<tbody>
+							<tr th:each="productCat : ${categoryList}">
+								<td hidden th:text="${productCat.id}"></td>
+								<td th:text="${productCat.categoryName}"></td>
+								<td class="rowBtn">
+									<div class="col-xs-6 previous">
+										<button class="btn btn-success btn-sm nominee-edit-btn"
+											value="Edit" id="btnEdit">
+											<i class="fa fa-pencil"></i>
+										</button>
+									</div>
+									<div class="col-xs-6 next">
+										<a class="btn btn-danger btn-sm nominee-delete-btn"
+											th:href="@{/admin/deleteProductCategory(id=${productCat.id})}"
+											onclick="if (!(confirm('Are you sure you want to delete this info?'))) return false"><i
+											style="color: white;" class="fa fa-trash"></i></a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div layout:fragment="adminScript">
+	<script>
+		$(document).ready(function() {
+			$('#tblCategory').DataTable();
+
+			$('#tblCategory tbody').on('click', '#btnEdit', function() {
+				var curRow = $(this).closest('tr');
+				var id = curRow.find('td:eq(0)').text();
+				var categoryName = curRow.find('td:eq(1)').text();
+				$('#categoryName').val(categoryName);
+				$('#id').val(id);
+			});
+
+			$("#btncategoryReset").click(function() {
+				$('#categoryName').val("");
+				$('#id').val("");
+			});
+		});
+	</script>
+</div>
+
+<div layout:fragment="adminCss"></div>

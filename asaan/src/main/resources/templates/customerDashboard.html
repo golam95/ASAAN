@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Sell Product</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="my-account-section section position-relative mb-50 fix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<!-- My Account Tab Menu Start -->
+						<div class="col-lg-3 col-12">
+							<div class="myaccount-tab-menu nav" role="tablist">
+								<a sec:authorize="hasRole('ROLE_USER')" href="#dashboad"
+									id="tabDashboard" data-toggle="tab"><i
+									class="fa fa-dashboard"></i> Dashboard</a> <a href="#product"
+									id="tabProduct" data-toggle="tab"><i
+									class="fa fa-dashboard"></i> Products</a> <a
+									sec:authorize="hasRole('ROLE_USER')" href="#address-edit"
+									data-toggle="tab"><i class="fa fa-map-marker"></i> Track
+									List</a> <a sec:authorize="hasRole('ROLE_USER')"
+									href="#sendMessage" data-toggle="tab"><i
+									class="fa fa-map-marker"></i> Send Message</a>
+
+
+							</div>
+						</div>
+						<!-- My Account Tab Menu End -->
+
+						<!-- My Account Tab Content Start -->
+						<div class="col-lg-9 col-12">
+							<div class="tab-content" id="myaccountContent">
+								<!-- Single Tab Content Start -->
+								<div class="tab-pane fade show" id="dashboad" role="tabpanel">
+									<div class="myaccount-content">
+										<div class="page-section section mb-50">
+											<div class="container">
+												<div class="row">
+													<div class="col-6">
+														<div class="well  btn btn-success">
+															<p>Total Message</p>
+															<h2 th:text=${totoalMsg}></h2>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="well  btn btn-warning">
+															<p>Total ScheduleTime</p>
+															<h2 th:text=${totalSchedule}></h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="tab-pane fade" id="product" role="tabpanel">
+									<div class="myaccount-content">
+										<div class="myaccount-table table-responsive text-center">
+											<p
+												style="padding: 4px; background: green; color: #fffffff; border-radius: 5px;">
+												<a style="color: white;"
+													href="https://dam.portal.gov.bd/sites/default/files/files/dam.portal.gov.bd/page/3b4ba184_b6af_4893_9d2e_78b8e63ed33e/2020-03-25-14-06-8a01d35af6b8c2fd0e65b1bc8f161718.pdf?fbclid=IwAR1vt2aBB8hHY8pVbVqHgwgMqSLAQdUJRYeyHZQjPlNwRxC6h0IEh9slgRI"
+													target="_blank">Govt Product Price List</a>
+											</p>
+											<div class="cart-table table-responsive mb-40">
+												<form>
+													<input type="hidden" id="checkRequest"
+														th:value="${pageStatus}">
+													<div class="container">
+														<div sec:authorize="hasRole('ROLE_USER')" class="row">
+															<div class="col-md-3">
+																<input class="from-design" placeholder="dd/mm/yyyy"
+																	type="text" id="schudleDate">
+																<div style="color: red; font-size: 13px;"
+																	class="item form-group" id="errorDatepicker"></div>
+															</div>
+
+															<div class="col-md-3">
+																<select style="font-size: 13px;" class="from-design"
+																	id="scheduleTime">
+																	<option value="-1">--select time--</option>
+																	<option>9AM-10AM</option>
+																	<option>10AM-11AM</option>
+																	<option>11AM-12PM</option>
+																	<option>12PM-1PM</option>
+																	<option>2PM-3PM</option>
+																	<option>4PM-5PM</option>
+																	<option>5PM-6PM</option>
+																	<option>6PM-8PM</option>
+																</select>
+																<div style="color: red; font-size: 13px;"
+																	class="item form-group" id="errorsellerTime"></div>
+															</div>
+
+															<div class="col-md-3">
+																<select style="font-size: 13px;" class="from-design"
+																	id="division">
+																	<option value="-1">--select division--</option>
+																	<option>Dhaka</option>
+																	<option>Khulna</option>
+																	<option>Barisal</option>
+																	<option>Chittagong</option>
+																	<option>Mymensingh</option>
+																	<option>Rajshahi</option>
+																	<option>Sylhet</option>
+																	<option>Rangpur</option>
+																</select>
+																<div style="color: red; font-size: 13px;"
+																	class="item form-group" id="errorsellerdivision"></div>
+															</div>
+
+															<div class="col-md-3">
+																<button style="margin-left: 6px;" type="button"
+																	id="btnschedule" class="btn btn-sm btn-success">Save</button>
+																<button style="margin-left: 6px;" type="button"
+																	id="btnReset" class="btn btn-sm btn-success">Reset</button>
+															</div>
+														</div>
+												</form>
+
+												<table class="table" id="tblSellingProduct">
+													<thead>
+														<tr>
+															<th style="font-size: 12px;">Product Name</th>
+															<th style="font-size: 12px;">Price(TK)</th>
+															<th style="font-size: 12px;">Govt Price(TK)</th>
+															<th style="font-size: 12px;">Checked</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="product : ${sellProductList}">
+															<td style="font-size: 13px;"
+																th:text="${product.productName}"></td>
+															<td style="font-size: 13px;" th:text="${product.price}"></td>
+															<td
+																style="font-size: 13px; color: red; font-weight: bold;"
+																th:text="${product.govtprice}"></td>
+															<td><input type="checkbox" id="edit"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- Single Tab Content Start -->
+							<div class="tab-pane fade" id="address-edit" role="tabpanel">
+								<div class="myaccount-content">
+									<form>
+										<div class="cart-table table-responsive mb-40">
+											<div class="container">
+												<table class="table" id="tblTrack">
+													<thead>
+														<tr>
+															<th style="font-size: 12px;">Product</th>
+															<th style="font-size: 12px;">Schedule Date</th>
+															<th style="font-size: 12px;">Schedule Time</th>
+															<th style="font-size: 12px;">Status</th>
+															<th style="font-size: 12px;">Date</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="track : ${trackProductList}">
+															<td style="font-size: 13px;"
+																th:text="${track.productName}"></td>
+															<td style="font-size: 13px;"
+																th:text="${track.SchudleDate}"></td>
+															<td style="font-size: 13px;"
+																th:text="${track.ScheduleTime}"></td>
+															<td
+																style="font-size: 16px; font-weight: bold; color: red;"
+																th:text="${track.status}==1 ? 'Pending' : 'Done'"></td>
+															<td style="font-size: 13px;" th:text="${track.date}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</form>
+
+								</div>
+							</div>
+							<!-- Single Tab Content End -->
+
+
+
+							<!-- Single Tab Content Start -->
+							<div class="tab-pane fade" id="sendMessage" role="tabpanel">
+								<div class="myaccount-content">
+									<div class="account-details-form">
+										<form>
+											<div class="row">
+												<div class="col-12 mb-30">
+													<input id="subject" placeholder="Enter subject" type="text">
+													<div style="color: red; font-size: 13px;"
+														class="item form-group" id="errormsgSubject"></div>
+												</div>
+												<div class="col-12 mb-30">
+													<textarea class="form-control" rows="6" id="comment"></textarea>
+													<div style="color: red; font-size: 13px;"
+														class="item form-group" id="errormsgComment"></div>
+												</div>
+												<div class="col-12">
+													<button type="button" id="msgSend" class="save-change-btn">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- My Account Tab Content End -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div layout:fragment="script">
+	<script src="/js/customer/customerPanel.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$("#schudleDate").datepicker({
+			dateFormat : 'dd/mm/yy'
+		});
+	</script>
+</div>
+
+<div layout:fragment="css">
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<style>
+.from-design {
+	margin-left: 10px;
+	width: 180px;
+	padding: 1px;
+}
+</style>
+</div>

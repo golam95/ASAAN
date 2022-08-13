@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Login - Register</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="my-account-section section position-relative mb-50 fix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<!-- My Account Tab Menu Start -->
+						<div class="col-lg-3 col-12">
+							<div class="myaccount-tab-menu nav" role="tablist">
+								<a href="#cart" data-toggle="tab" id="tabCart"><i
+									class="fa fa-dashboard"></i> Cart Details</a>
+							</div>
+						</div>
+						<!-- My Account Tab Menu End -->
+
+						<!-- My Account Tab Content Start -->
+						<div class="col-lg-9 col-12">
+							<div class="tab-content" id="myaccountContent">
+								<div class="tab-pane fade" id="cart" role="tabpanel">
+									<div class="myaccount-content">
+										<div class="page-section section mb-50">
+											<div class="container">
+												<div class="row">
+													<div class="col-12">
+														<form action="#">
+															<div class="cart-table table-responsive mb-40">
+																<table class="table" id="tblCartItem">
+																	<thead>
+																		<tr>
+																			<th style="font-size: 12px;">Product Id</th>
+																			<th style="font-size: 12px;">Product Name</th>
+																			<th style="font-size: 12px;">Price(AED)</th>
+																			<th style="font-size: 12px;">Quantity</th>
+																			<th style="font-size: 12px;">Action</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr th:each="cart : ${cartListData}">
+																			<td style="font-size: 13px;"
+																				th:text="${cart.productId}"></td>
+																			<td style="font-size: 13px;"
+																				th:text="${cart.productName}"></td>
+																			<td style="font-size: 13px;" th:text="${cart.price}"></td>
+																			<td style="font-size: 13px;"
+																				th:text="${cart.quantity}"></td>
+																			<td class="pro-remove"><a
+																				th:href="@{/customer/deleteCart(delId=${cart.id})}"><i
+																					style="color: red;" class="fa fa-trash-o"></i></a></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</form>
+
+														<div class="row">
+															<div class="col-lg-6 col-12">
+																<br> <br> <br>
+																<div id="hiddenTextFiled" class="row">
+																	<div class="col-md-6 col-12 mb-20">
+																		<label
+																			style="color: black; font-weight: bold; font-size: 11px;">Country<span
+																			class="manadatory">*</span></label> <input type="hidden"
+																			id="productName" th:value="${totalProduct}">
+																		<input type="hidden" id="quantity"
+																			th:value="${totalQuantity}"> <input
+																			type="hidden" id="productPrice"
+																			th:value="${totalPrice}"> <input disabled
+																			type="text" id="country" value="Dubai">
+																	</div>
+
+																	<div class="col-md-6 col-12 mb-20">
+																		<label
+																			style="color: black; font-weight: bold; font-size: 11px;">Town/City<span
+																			class="manadatory">*</span></label> <input type="text"
+																			id="town"> <span style="color: red;"
+																			id="errortown"></span>
+																	</div>
+
+																	<div class="col-md-6 col-12 mb-20">
+																		<label
+																			style="color: black; font-weight: bold; font-size: 11px;">Zip
+																			Code<span class="manadatory">*</span>
+																		</label> <input type="text" id="zipcode"> <span
+																			style="color: red;" id="errorzipcode"></span>
+																	</div>
+
+																	<div class="col-md-6 col-12 mb-20">
+																		<label
+																			style="color: black; font-weight: bold; font-size: 11px;">Shiping
+																			Address<span class="manadatory">*</span>
+																		</label> <input type="text" id="shipingAddress"> <span
+																			style="color: red;" id="errorshipingAddress"></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-lg-6 col-12 d-flex">
+																<!--=======  Cart summery  =======-->
+																<div id="cartSummaryID" class="cart-summary">
+																	<div style="background: #FFFFFF;"
+																		class="cart-summary-wrap">
+																		<h4>Cart Summary</h4>
+																		<p>
+																			Products : <span th:text="${totalProduct}"></span>
+																		</p>
+																		<p>
+																			Total Quantity : <span th:text="${totalQuantity}"></span>
+																		</p>
+																		<p>
+																			Total Price(AED) : <span th:text="${totalPrice}"></span>
+																		</p>
+																		<h2>
+																			Grand Total =<span th:text="${totalPrice}"></span>
+																		</h2>
+																	</div>
+																	<div class="cart-summary-button">
+																		<button class="checkout-btn" id="btnCheckOut">Checkout</button>
+																	</div>
+																</div>
+																<!--=======  End of Cart summery  =======-->
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Single Tab Content End -->
+							</div>
+						</div>
+						<!-- My Account Tab Content End -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div layout:fragment="script"></div>
+
+	<div layout:fragment="css"></div>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+
+<div layout:fragment="adminContent">
+	<div style="margin-top: 70px;"></div>
+	<div class="row">
+
+		<div class="col-md-3">
+			<div class="card border-info mx-sm-1 p-3">
+				<div class="card border-info shadow text-info p-3 my-card">
+					<span class="fa fa-user-plus" aria-hidden="true"></span>
+				</div>
+				<div class="text-info text-center mt-3">
+					<h4>Total User</h4>
+				</div>
+				<div class="text-info text-center mt-2">
+					<h1 th:text="${userCount}"></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-success mx-sm-1 p-3">
+				<div class="card border-success shadow text-success p-3 my-card">
+					<span class="fa fa-product-hunt" aria-hidden="true"></span>
+				</div>
+				<div class="text-success text-center mt-3">
+					<h4>Sell Product</h4>
+				</div>
+				<div class="text-success text-center mt-2">
+					<h1 th:text="${sellCount}"></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-danger mx-sm-1 p-3">
+				<div class="card border-danger shadow text-danger p-3 my-card">
+					<span class="fa fa-product-hunt" aria-hidden="true"></span>
+				</div>
+				<div class="text-danger text-center mt-3">
+					<h4>Buy Product</h4>
+				</div>
+				<div class="text-danger text-center mt-2">
+					<h1 th:text="${buyCount}"></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-warning mx-sm-1 p-3">
+				<div class="card border-warning shadow text-warning p-3 my-card">
+					<span class="fa fa-comments" aria-hidden="true"></span>
+				</div>
+				<div class="text-warning text-center mt-3">
+					<h4>Message</h4>
+				</div>
+				<div class="text-warning text-center mt-2">
+					<h1 th:text="${SellMsgCount}"></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="margin-top: 40px;"></div>
+
+	<div class="row">
+
+		<div class="col-md-3">
+			<div class="card border-info mx-sm-1 p-3">
+				<div class="card border-info shadow text-info p-3 my-card">
+					<span class="fa fa-first-order" aria-hidden="true"></span>
+				</div>
+				<div class="text-info text-center mt-3">
+					<h4>Customer Order</h4>
+				</div>
+				<div class="text-info text-center mt-2">
+					<h1 th:text=${orderCount}></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-success mx-sm-1 p-3">
+				<div class="card border-success shadow text-success p-3 my-card">
+					<span class="fa fa-phone" aria-hidden="true"></span>
+				</div>
+				<div class="text-success text-center mt-3">
+					<h4>Contact</h4>
+				</div>
+				<div class="text-success text-center mt-2">
+					<h1 th:text=${contactCount}></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-danger mx-sm-1 p-3">
+				<div class="card border-danger shadow text-danger p-3 my-card">
+					<span class="fa fa-calendar" aria-hidden="true"></span>
+				</div>
+				<div class="text-danger text-center mt-3">
+					<h4>Schedule</h4>
+				</div>
+				<div class="text-danger text-center mt-2">
+					<h1 th:text=${scheduleCount}></h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card border-warning mx-sm-1 p-3">
+				<div class="card border-warning shadow text-warning p-3 my-card">
+					<span class="fa fa-car" aria-hidden="true"></span>
+				</div>
+				<div class="text-warning text-center mt-3">
+					<h4>Customer</h4>
+				</div>
+				<div class="text-warning text-center mt-2">
+					<h1>4</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<div layout:fragment="adminScript"></div>
+
+<div layout:fragment="adminCss">
+	<style>
+.my-card {
+	position: absolute;
+	left: 40%;
+	top: -20px;
+	border-radius: 50%;
+}
+</style>
+</div>

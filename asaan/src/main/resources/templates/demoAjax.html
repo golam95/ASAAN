@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row"></div>
+		</div>
+	</div>
+
+	<div class="page-content mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-4 mb-xs-35">
+
+					<div class="contact-page-side-content">
+						<h3 class="contact-page-title">Contact Us</h3>
+
+						<div class="single-contact-block">
+							<h4>
+								<img src="assets/images/icons/contact-icon1.png" alt="">
+								Address
+							</h4>
+							<p>123 Main Street, Anytown, CA 12345 – USA</p>
+						</div>
+						<div class="single-contact-block">
+							<h4>
+								<img src="assets/images/icons/contact-icon2.png" alt="">
+								Phone
+							</h4>
+							<p>Mobile: (08) 123 456 789</p>
+							<p>Hotline: 1009 678 456</p>
+						</div>
+
+						<div class="single-contact-block">
+							<h4>
+								<img src="assets/images/icons/contact-icon3.png" alt="">
+								Email
+							</h4>
+							<p>yourmail@domain.com</p>
+							<p>support@hastech.company</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-8 pl-100 pl-xs-15">
+
+					<div class="contact-form-content">
+						<h3 class="contact-page-title">Tell Us Your Message</h3>
+						<div class="form-group">
+						<div class="col-xs-15">
+							<div>
+								<!-- Check for registration error -->
+								<div th:if="${addSuccess}"
+									class="alert alert-success alert-dismissible">
+									<a href="#" class="close" data-dismiss="alert"
+										aria-label="close">&times;</a> <strong>Success!</strong> <span th:text="${addSuccess}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+						<div class="contact-form">
+							<form>
+								<div class="form-group">
+									<label>Your Name <span class="manadatory">*</span></label> <input
+										type="text" name="name" id="userName">
+									<span class="errorMsg" id="errorMsgname"></span>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-success" id="btnNomineeID">Save</button>
+								</div>
+							</form>
+						</div>
+						<p class="form-messege pt-10 pb-10 mt-10 mb-10"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div layout:fragment="script">
+<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('#btnNomineeID').on("click", function(e) {
+				e.preventDefault();
+
+				alert("hellow");
+
+				var userName = $('#userName').val();
+
+				var user = {};
+				user.userName = userName;
+
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/globalsaveDemo",
+					data : JSON.stringify(user),
+					timeout : 100000,
+					async : true,
+					dataType : 'json',
+					success : function(data) {
+						alert("Successfully added.");
+					},
+					error : function(xhr, status, error) {
+						var err = eval("(" + xhr.responseText + ")");
+						alert(err.Message);
+					}
+				});
+			});
+
+		});
+	</script>
+</div>

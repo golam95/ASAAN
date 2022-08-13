@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/common/layout/adminBase">
+
+<div layout:fragment="adminContent">
+	<div style="border: 1px solid #849BC0; border-radius: 5px;"
+		class="x_panel">
+		<div class="x_title">
+			<h2
+				style="font-size: 19px; font-family: PoynterOSDisp; font-weight: bold;">View
+				Customer Order Information</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+
+			<div class="form-group">
+				<div class="col-xs-15">
+					<!-- Check for login error -->
+					<div th:if="${successMsg}"
+						class="alert alert-success alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Success!</strong> <span th:text="${successMsg}"></span>
+					</div>
+				</div>
+			</div>
+
+
+			<form class="form-horizontal form-label-left"
+				th:action="@{/admin/sendEmailcustomerOrder}" th:object="${order}"
+				method="POST">
+				<div class="col-md-12">
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name"> User Name </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="hidden" th:field="*{id}"> <input type="text"
+								id="first-name" readonly th:field="*{userName}"
+								class="form-control">
+						</div>
+					</div>
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name"> Product Name </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name"
+								th:field="*{productName}" class="form-control">
+						</div>
+					</div>
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Product Price </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name"
+								th:field="*{productPrice}" class="form-control">
+						</div>
+					</div>
+
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Product Quantity </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name"
+								th:field="*{quantity}" class="form-control">
+						</div>
+					</div>
+
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Country </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name" th:field="*{country}"
+								class="form-control">
+						</div>
+					</div>
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">Shiping Address </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name"
+								th:field="*{shipingAddress}" class="form-control">
+						</div>
+					</div>
+
+					<div class="item form-group">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">City/Town </label>
+						<div class="col-md-6 col-sm-6 ">
+							<input type="text" readonly id="first-name" th:field="*{town}"
+								class="form-control">
+						</div>
+					</div>
+
+					<div style="margin-left: 232px;">
+						<button style="margin-top: 15px;" type="submit"
+							class="btn btn-sm btn-success">
+							<i class="fa fa-check"></i>Ok
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div layout:fragment="adminScript">
+	<script src="/js/admin/productCategory.js"></script>
+</div>
+<div layout:fragment="adminCss"></div>

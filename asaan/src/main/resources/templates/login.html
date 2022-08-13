@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Login</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-content mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 offset-md-2">
+					<div class="form-group">
+						<div class="col-xs-15">
+							<!-- Check for login error -->
+							<div th:if="${param.error}"
+								class="alert alert-danger alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert"
+									aria-label="close">&times;</a> <strong>Error!</strong> Invalid
+								username and password.
+							</div>
+
+							<div th:if="${param.logout}"
+								class="alert alert-success alert-dismissible">
+								<a href="#" class="close" data-dismiss="alert"
+									aria-label="close">&times;</a> <strong>Error!</strong> You have
+								been logged out.
+							</div>
+
+						</div>
+					</div>
+					<form th:action="@{/authenticateTheUser}" method="POST">
+						<div style="border-top: 4px solid #80BB01; border-radius: 5px;"
+							class="login-form">
+							<div class="row">
+								<div class="col-md-12 col-12 mb-20">
+									<label>UserName</label> <input class="mb-0" type="text"
+										name="username" placeholder="username">
+								</div>
+								<div class="col-12 mb-20">
+									<label>Password</label> <input class="mb-0" type="password"
+										name="password" placeholder="password">
+								</div>
+								<div class="col-md-8">
+									<div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+										<a th:href="@{/customer/signup}">Create a new account</a>
+									</div>
+								</div>
+								<div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+									<a th:href="@{/customer/reset}"> Forgotten pasward?</a>
+								</div>
+
+								<div class="col-md-12">
+									<button type="submit" class="register-button mt-0">Login</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div layout:fragment="script"></div>
+
+<div layout:fragment="css"></div>

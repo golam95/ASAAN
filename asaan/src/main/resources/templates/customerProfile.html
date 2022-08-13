@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+	<br />
+	<div class="breadcrumb-area mb-50">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="breadcrumb-container">
+						<ul>
+							<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+							<li class="active">Profile</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="my-account-section section position-relative mb-50 fix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<!-- My Account Tab Menu Start -->
+						<div class="col-lg-3 col-12">
+							<div class="myaccount-tab-menu nav" role="tablist">
+								<a sec:authorize="hasRole('ROLE_USER')" class='active'
+									href="#account-info" id="tabAcc" data-toggle="tab"><i
+									class="fa fa-user"></i> Account Details</a>
+							</div>
+						</div>
+						<!-- My Account Tab Menu End -->
+
+						<!-- My Account Tab Content Start -->
+						<div class="col-lg-9 col-12">
+							<div class="tab-content" id="myaccountContent">
+								<!-- Single Tab Content Start -->
+							</div>
+							<!-- Single Tab Content Start -->
+							<div class="tab-pane fade show" id="account-info" role="tabpanel">
+								<div class="myaccount-content">
+									<div class="col-12 mb-30">
+										<h4>Personal Information Settings</h4>
+									</div>
+									<div class="account-details-form">
+										<form action="#">
+											<div class="row">
+												<div class="col-12 mb-30">
+													<input placeholder="User name" type="text"
+														th:value="${userProfile.firstname}" id="firstname">
+												</div>
+												<div class="col-12 mb-30">
+													<input id="email" placeholder="Email Address" type="email"
+														th:value="${userProfile.email}">
+												</div>
+												<div class="col-12 mb-30">
+													<input placeholder="Contact No" type="text"
+														th:value="${userProfile.phone}" id="phone">
+												</div>
+												<div class="col-12 mb-30">
+													<h4>Password Settings</h4>
+												</div>
+												<div class="col-12 mb-30">
+													<input placeholder="New Password" type="password"
+														id="password">
+												</div>
+												<div class="col-12">
+													<button type="button" id="btnUpdateInfo"
+														class="save-change-btn">Save Changes</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- My Account Tab Content End -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div layout:fragment="script">
+	<script>
+		$(document).ready(function() {
+
+			$("#btnUpdateInfo").click(function() {
+
+				if (true) {
+					var firstname = $('#firstname').val();
+					var email = $('#email').val();
+					var phone = $('#phone').val();
+					var password = $('#password').val();
+
+					var profileList = {};
+					profileList.firstname = firstname;
+					profileList.email = email;
+					profileList.phone = phone;
+					profileList.password = password;
+
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/customer/updateSellerProfile",
+						data : JSON.stringify(profileList),
+						timeout : 100000,
+						async : true,
+						dataType : 'json',
+						success : function(data) {
+							if (data == '1') {
+								alert("Profile updated successfully!!");
+							}
+						},
+						error : function(xhr, status, error) {
+							var err = eval("(" + xhr.responseText + ")");
+							alert(err.Message);
+						}
+					});
+				}
+			});
+		});
+	</script>
+
+</div>
+
+<div layout:fragment="css"></div>
