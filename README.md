@@ -25,3 +25,7 @@ This project name is “ASAAN”. This application is developed using Spring Boo
 </br>
 <img src="asaan/img/06.PNG" width=1200 height=450>
 </br>
+<img src="asaan/img/09.PNG" width=1200 height=450>
+</br>
+<img src="asaan/img/07.PNG" width=1200 height=450>
+</br>
