@@ -16,15 +16,15 @@ This project name is “ASAAN”. This application is developed using Spring Boo
 * Add Post</span> <br>
 * Mange messages</span> <br>
 <br>
-<img src="asaan/asaan/img/01.PNG" width=1200 height=450>
+<img src="asaan/img/01.PNG" width=1200 height=450>
 </br>
-<img src="asaan/asaanasaan/img/02.PNG" width=1200 height=450>
+<img src="asaanasaan/img/02.PNG" width=1200 height=450>
 </br>
-<img src="asaan/asaan/img/03.PNG" width=1200 height=450>
+<img src="asaan/img/03.PNG" width=1200 height=450>
 </br>
-<img src="asaan/asaan/img/04.PNG" width=1200 height=450>
+<img src="asaan/img/04.PNG" width=1200 height=450>
 </br>
-<img src="asaan/asaan/img/05.PNG" width=1200 height=450>
+<img src="asaan/img/05.PNG" width=1200 height=450>
 </br>
-<img src="asaan/asaan/img/06.PNG" width=1200 height=450>
+<img src="asaan/img/06.PNG" width=1200 height=450>
 </br>
