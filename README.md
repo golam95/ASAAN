@@ -16,7 +16,6 @@ This project name is “ASAAN”. This application is developed using Spring Boo
 * Add Post</span> <br>
 * Mange messages</span> <br>
 <br>
-<img src="asaan/img/01.PNG" width=1200 height=450>
 </br>
 <img src="asaan/img/02.PNG" width=1200 height=450>
 </br>
